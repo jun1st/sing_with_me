@@ -13,7 +13,6 @@ set :deploy_to, "/var/www/sing_with_me"
 # Default value for :format is :airbrussh.
 set :format, :pretty
 
-set :format, :pretty
 set :log_level, :debug
 set :use_sudo, false
 set :pty, false
@@ -27,7 +26,7 @@ set :puma_user, fetch(:user)
 # Default value for :pty is false
 # set :pty, true
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets')
