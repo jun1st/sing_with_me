@@ -13,6 +13,10 @@
       </ul>
     </div>
   <% end %>
-	<%= f.text_field :url %>
-	<%= f.submit "Create" %>
+  <div class="form-group">
+    <label for="sing[url]">唱本 URL</label>
+    <%= f.text_field :url, class: 'form-control', placeholder: '请输入唱本 url' %>
+    <small id="emailHelp" class="form-text text-muted">唱本 url 应该是 wav 文件地址.</small>
+  </div>
+	<%= f.submit "Create", class: 'btn btn-primary' %>
 <% end %>

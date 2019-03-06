@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_075010) do
+ActiveRecord::Schema.define(version: 2019_03_06_145901) do
 
-  create_table "sings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "sings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "url"
     t.string "result", limit: 2048
     t.integer "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "result_2", limit: 2048
+    t.string "raw_result", limit: 2048
+    t.string "raw_result_2", limit: 2048
     t.index ["song_id"], name: "index_sings_on_song_id"
   end
 
-  create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

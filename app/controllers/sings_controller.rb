@@ -1,6 +1,7 @@
 class SingsController < ApplicationController
   
   def index
+    @song = Song.find(params[:song_id])
     @sings = Sing.where(song_id: params[:song_id])
   end
 
@@ -15,7 +16,7 @@ class SingsController < ApplicationController
   def create
     @sing = Sing.new(sing_param.merge(song_id: params[:song_id]))
     if @sing.save
-      redirect_to @sing.song
+      redirect_to song_sings_path(@sing.song)
     else
       render :new
     end
@@ -31,7 +32,7 @@ class SingsController < ApplicationController
     @sing = Sing.find(params[:id])
     @sing.destroy
 
-    redirect_to @sing.song
+    redirect_to song_sings_path(@sing.song)
   end
 
   private

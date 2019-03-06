@@ -1,12 +1,12 @@
-<h1>Listing Sings</h1>
+<h1><%= @song.name %> 的所有唱本</h1>
  
-<table>
+<table class="table" style="word-break: break-all;">
   <thead>
     <tr>
     	<th>Id</th>
       <th>Url</th>
-      <th>Result</th>
-      <th>Result 2</th>
+      <th>Result--44100</th>
+      <th>Result--22050</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,13 +14,19 @@
   <tbody>
     <% @sings.each do |sing| %>
       <tr>
-      	<td><%= sing.id %></td>
-        <td><%= sing.url %></td>
-        <td><%= sing.result %></td>
-        <td><%= sing.result_2 %></td>
-        <td><%= link_to "Show", song_sing_path(sing.song_id, sing.id) %></td>
-        <td><%= link_to "Edit", edit_song_sing_path(sing.song, sing) %></td>
-        <td><%= link_to "Destroy", song_sing_path(sing.song_id, sing.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      	<td style="width: 4%;"><%= sing.id %></td>
+        <td style="width: 22%;"><%= sing.url %></td>
+        <td style="width: 30%;">
+          <div style="overflow-wrap: break-word; word-wrap: break-all;"><%= sing.result %></div>
+        </td>
+        <td style="width: 36%;"><div style="overflow-wrap: break-word; word-wrap: break-all;"><%= sing.result_2 %></div></td>
+        <td style="width: 8%;">
+          <%= link_to "Show", song_sing_path(sing.song_id, sing.id) %>
+          <br/>
+          <%= link_to "Edit", edit_song_sing_path(sing.song, sing) %>
+          <br/>
+          <%= link_to "Destroy", song_sing_path(sing.song_id, sing.id), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
