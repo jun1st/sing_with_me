@@ -1,0 +1,18 @@
+<h1>Sings#new</h1>
+<%= form_for @sing, url: {action: "create"}, html: { class: "nifty_form" } do |f| %>
+	<% if @sing.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@sing.errors.count, "error") %> prohibited
+        this sing from being saved:
+      </h2>
+      <ul>
+        <% @sing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<%= f.text_field :url %>
+	<%= f.submit "Create" %>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing Sings</h1>
+ 
+<table>
+  <thead>
+    <tr>
+    	<th>Id</th>
+      <th>Url</th>
+      <th>Result</th>
+      <th>Result 2</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+    <% @sings.each do |sing| %>
+      <tr>
+      	<td><%= sing.id %></td>
+        <td><%= sing.url %></td>
+        <td><%= sing.result %></td>
+        <td><%= sing.result_2 %></td>
+        <td><%= link_to "Show", song_sing_path(sing.song_id, sing.id) %></td>
+        <td><%= link_to "Edit", edit_song_sing_path(sing.song, sing) %></td>
+        <td><%= link_to "Destroy", song_sing_path(sing.song_id, sing.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ 
+<br>
+ 
+<%= link_to "New Sing", new_song_sing_path(params[:song_id]) %>
