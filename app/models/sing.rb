@@ -14,7 +14,7 @@ class Sing < ApplicationRecord
 	private
 		def calculate_fingerprint
 			if url_changed? && url.present?
-				context1 = Chromaprint::Context.new(44100, 1)
+				context1 = Chromaprint::Context.new(24000, 1)
 
 				data1 = open(url).read
 				fingerprint1 = context1.get_fingerprint(data1)

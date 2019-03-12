@@ -1,6 +1,9 @@
 require 'open-uri'
 
 class HomeController < ApplicationController
+
+	skip_before_action :authenticate_user!, only: [:compare]
+
   def index
   end
 
@@ -15,7 +18,7 @@ class HomeController < ApplicationController
 		# data1 = File.binread('https://huliaoappcdn.vwvvwv.com/minapp/2019/03/05/201903051851315312748732wechatapp.wav')
 
 		# Create context for rate=44100 and channel=1.
-		context1 = Chromaprint::Context.new(44100, 1)
+		context1 = Chromaprint::Context.new(24000, 1)
 		fingerprint_1 = context1.get_fingerprint(data1)
 
 		# puts fingerprint_1
