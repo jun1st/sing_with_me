@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   post 'compare' => 'home#compare'
 
-  root 'home#index'
+  root 'songs#index'
 end
