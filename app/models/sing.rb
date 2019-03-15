@@ -16,6 +16,7 @@ class Sing < ApplicationRecord
 			if url_changed? && url.present?
 				context1 = Chromaprint::Context.new(24000, 1)
 
+				puts url
 				data1 = open(url).read
 				fingerprint1 = context1.get_fingerprint(data1)
 
