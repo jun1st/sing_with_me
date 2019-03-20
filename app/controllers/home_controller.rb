@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def compare
-  	song_id = params[:song_id]
+  	song_id = params[:uuid]
   	song_url = params[:song_url]
 
 		# Get audio data. Data should be in raw audio format with 16-bit signed samples.
@@ -29,24 +29,25 @@ class HomeController < ApplicationController
 		fingerprint_2 = context2.get_fingerprint(data1)
 		# compressed_2 = fingerprint_2.compressed  # => "AQAALOkUKdlChE92NNeFn8EjF9..."
 
-		song = Song.includes(:sings).find(song_id)
+		song = Song.includes(:sings).find_by(uuid: song_id)
 		max_rate = 0.0
 		song.sings.each do |sing|
-			sing_finger_1 = Chromaprint::Fingerprint.new(sing.result, sing.raw_result)
-			r = fingerprint_1.compare(sing_finger_1)
-			max_rate = r if r > max_rate
-
-			sing_finger_1 = Chromaprint::Fingerprint.new(sing.result_2, sing.raw_result_2)
-			r = fingerprint_1.compare(sing_finger_1)
-			max_rate = r if r > max_rate
-
-			sing_finger_1 = Chromaprint::Fingerprint.new(sing.result, sing.raw_result)
-			r = fingerprint_2.compare(sing_finger_1)
-			max_rate = r if r > max_rate
-			# r = compressed_1.compare(sing.result_2)
+			# sing_finger_1 = Chromaprint::Fingerprint.new(sing.result, sing.raw_result)
+			# r = fingerprint_1.compare(sing_finger_1)
 			# max_rate = r if r > max_rate
 
 			sing_finger_1 = Chromaprint::Fingerprint.new(sing.result_2, sing.raw_result_2)
+
+			r = fingerprint_1.compare(sing_finger_1)
+			max_rate = r if r > max_rate
+
+			# sing_finger_1 = Chromaprint::Fingerprint.new(sing.result, sing.raw_result)
+			# r = fingerprint_2.compare(sing_finger_1)
+			# max_rate = r if r > max_rate
+			# r = compressed_1.compare(sing.result_2)
+			# max_rate = r if r > max_rate
+
+			# sing_finger_1 = Chromaprint::Fingerprint.new(sing.result_2, sing.raw_result_2)
 			r = fingerprint_2.compare(sing_finger_1)
 			max_rate = r if r > max_rate
 		end
