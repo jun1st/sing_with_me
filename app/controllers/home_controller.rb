@@ -1,4 +1,6 @@
 require 'open-uri'
+require 'streamio-ffmpeg'
+require 'net/http'
 
 class HomeController < ApplicationController
 
@@ -11,10 +13,22 @@ class HomeController < ApplicationController
   	song_id = params[:uuid]
   	song_url = params[:song_url]
 
+  	movie = FFMPEG::Movie.new(song_url)
+
+  	temp_path = "#{Rails.root}/public/#{song_id}_new.wav"
+  	
+  	data1 = 
+	  	if movie.audio_sample_rate != 22050
+	  		movie.transcode(temp_path, { audio_sample_rate: 22050 })	
+	  		File.binread(temp_path)
+	  	else
+	  		open(song_url).read
+	  	end
+
 		# Get audio data. Data should be in raw audio format with 16-bit signed samples.
 		# The library doesn't care about decoding formats like mp3 or ogg, you should
 		# do it yourself.
-		data1 = open(song_url).read
+		# data1 = open(song_url).read
 		# data1 = File.binread('https://huliaoappcdn.vwvvwv.com/minapp/2019/03/05/201903051851315312748732wechatapp.wav')
 
 		# Create context for rate=44100 and channel=1.
