@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'streamio-ffmpeg'
 require 'net/http'
+require 'securerandom'
 
 class HomeController < ApplicationController
 
@@ -15,7 +16,7 @@ class HomeController < ApplicationController
 
   	movie = FFMPEG::Movie.new(song_url)
 
-  	temp_path = "#{Rails.root}/public/#{song_id}_new.wav"
+  	temp_path = "#{Rails.root}/public/#{song_id}_#{SecureRandom.hex}.wav"
   	
   	data1 = 
 	  	if movie.audio_sample_rate != 22050
