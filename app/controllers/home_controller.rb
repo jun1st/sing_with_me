@@ -70,6 +70,6 @@ class HomeController < ApplicationController
 		# Compare 2 fingerprints, result is 0..1 range, where 1 is 100% similarity.
 		# fingerprint1.compare(fingerprint2)  # => 0.93231
 
-  	render json: { song: max_rate }
+  	render json: { rate: max_rate, compressed: fingerprint2.compressed, raw: fingerprint2.raw }
   end
 end
