@@ -5,7 +5,7 @@ require 'securerandom'
 
 class HomeController < ApplicationController
 
-	skip_before_action :authenticate_user!, only: [:compare]
+	skip_before_action :authenticate_user!, only: [:compare, :songs_compare]
 
   def index
   end
@@ -81,6 +81,6 @@ class HomeController < ApplicationController
 
   	rate = fingerprint1.compare(fingerprint2)
 
-  	return json: { rate: rate }
+  	render json: { rate: rate }
   end
 end

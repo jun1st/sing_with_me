@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'compare' => 'home#compare'
-  get 'songs_compare' => 'homt#songs_compare'
+  get 'songs_compare' => 'home#songs_compare'
 
   root 'songs#index'
 end
