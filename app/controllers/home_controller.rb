@@ -56,12 +56,6 @@ class HomeController < ApplicationController
 			r = fingerprint_1.compare(sing_finger_1)
 			max_rate = r if r > max_rate
 
-			# sing_finger_1 = Chromaprint::Fingerprint.new(sing.result, sing.raw_result)
-			# r = fingerprint_2.compare(sing_finger_1)
-			# max_rate = r if r > max_rate
-			# r = compressed_1.compare(sing.result_2)
-			# max_rate = r if r > max_rate
-
 			# sing_finger_1 = Chromaprint::Fingerprint.new(sing.result_2, sing.raw_result_2)
 			r = fingerprint_2.compare(sing_finger_1)
 			max_rate = r if r > max_rate
@@ -71,5 +65,22 @@ class HomeController < ApplicationController
 		# fingerprint1.compare(fingerprint2)  # => 0.93231
 
   	render json: { rate: max_rate, compressed: fingerprint2.compressed, raw: fingerprint2.raw }
+  end
+
+  def songs_compare
+  	song_url_1 = params[:song_url_1]
+  	song_url_2 = params[:song_url_2]
+
+  	data_1 = open(song_url_1).read
+  	data_2 = open(song_url_2).read
+
+  	context = Chromaprint::Context.new(22050, 1)
+
+  	fingerprint1 = context.get_fingerprint(data_1)
+  	fingerprint2 = context.get_fingerprint(data_2)
+
+  	rate = fingerprint1.compare(fingerprint2)
+
+  	return json: { rate: rate }
   end
 end
